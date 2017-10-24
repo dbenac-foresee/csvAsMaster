@@ -1,0 +1,10 @@
+okta:
+  url: https://foresee-dev.oktapreview.com
+  apiKey:  00gclx7QDEg9_5A9zjpR978MQlfF3bY9WQ2whODdRZ
+
+app:
+  workLocation: /oktaMigration
+  logLocation: ${app.workLocation}/logs
+  csvFile: ${app.workLocation}/invalid.csv
+  runMode: save
+  numWorkers: 5

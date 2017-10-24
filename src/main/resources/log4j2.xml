@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" monitorInterval="5">
+    <Properties>
+	    <Property name="APP_NAME">okta-users-migration</Property>
+	    <Property name="LOG_PATH">/var/log/okta-users-migration</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ISO8601} [%X] [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingRandomAccessFile name="AppLog"
+	                             fileName="${LOG_PATH}/app.log"
+                                 filePattern="${LOG_PATH}/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH}-%i.log" 
+				                 immediateFlush="false" >
+            <PatternLayout pattern="[%d{ISO8601}] [%level] [${APP_NAME}] [%X{X-B3-TraceId}] [%X{X-B3-SpanId}] [%X{x-acs-username}] [%X{x-acs-host}] [%t] [%logger{36}] [%X{x-acs-locale}] [%X{x-acs-ipaddress}] [%msg]%n"/>
+
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.okta.foresee" level="TRACE" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

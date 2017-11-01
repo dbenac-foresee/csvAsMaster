@@ -1,10 +1,29 @@
+app:
+  workLocation: /oktaMigration
+  logLocation: ${app.workLocation}/logs
+  numWorkers: 5
+  runMode: save   # <-- Make sure the correct runMode is specified !!!!
+
+spring:
+  profiles:
+    active: qa  # <-- Make sure the correct env is specified !!!!
+
+--- # DEV profile
+
 okta:
   url: https://foresee-dev.oktapreview.com
   apiKey:  00gclx7QDEg9_5A9zjpR978MQlfF3bY9WQ2whODdRZ
 
 app:
-  workLocation: /oktaMigration
-  logLocation: ${app.workLocation}/logs
-  csvFile: ${app.workLocation}/invalid.csv
-  runMode: save
-  numWorkers: 5
+  csvFile: ${app.workLocation}/DEV_export.csv
+
+--- # QA profile
+
+spring.profiles: qa
+
+okta:
+  url: https://foresee-qa.oktapreview.com
+  apiKey:  00SrtYL_HESK4uizNQSDA88I2tLLB-dJ8B32TqKXmJ
+
+app:
+  csvFile: ${app.workLocation}/QA_export.csv

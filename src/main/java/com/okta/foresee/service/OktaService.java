@@ -400,7 +400,7 @@ public class OktaService {
 
     public String getOktaLogin(String userName, String userNameSuffix) {
         return foreseeCSVUtil.isValidUserNameFormat(userName)
-                ? userName.toLowerCase()
-                : (userName + ForeseeConstants.AT_SYMBOL + userNameSuffix).toLowerCase();
+                ? userName.toLowerCase().trim()
+                : (userName.trim() + ForeseeConstants.AT_SYMBOL + userNameSuffix.trim()).toLowerCase();
     }
 }

@@ -10,6 +10,7 @@ public class ForeseeConstants {
     public static final String BLANK_STRING = "";
     public static final String CLIENT_ID = "CLIENT_ID";
     public static final String CONTENT_TYPE = "Content-Type";
+    public static final String EMAIL = "EMAIL";
     public static final String EXTERNAL_ID = "EXTERNAL_ID";
     public static final String FEDERATION = "FEDERATION";
     public static final String FIRST_NAME = "FIRST_NAME";

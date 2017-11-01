@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @ComponentScan(value = "com.okta.foresee")
@@ -17,8 +16,6 @@ public class Application  {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
 
-        Environment env = ctx.getBean(Environment.class);
-
         log.debug("CSVImportsMain Starting...");
         Stopwatch stopwatch = Stopwatch.createStarted();
 
@@ -26,6 +23,7 @@ public class Application  {
         ci.executeImport();
 
         log.debug( "Took {} to complete", stopwatch);
+        ctx.close();
         System.exit(0);
     }
 

@@ -33,8 +33,7 @@ public class CsvRowHandler {
         final String authnProvider = csvLine.get(AUTHENTICATION_PROVIDER).trim();
         final boolean accountEnabled = "Y".equalsIgnoreCase(csvLine.get(ACCOUNT_ENABLED).trim());
         final String clientId = csvLine.get(CLIENT_ID).trim();
-//          FIXME - final String email = items.get( ATTRIBUTES.indexOf(ForeseeConstants.EMAIL) ).trim();
-        final String email = "dustin.benac@foresee.com";
+        final String email = csvLine.get(EMAIL).trim();
         final String externalId = csvLine.get(EXTERNAL_ID).trim();
         final String phone = csvLine.get(PHONE_NUMBER).trim();
         boolean clientIdChange = false;
@@ -117,7 +116,7 @@ public class CsvRowHandler {
         UserStatus existingUserStatus = existingOktaUser.getStatus();
 
         //Post create/update user LCM operation - suspend, unsuspend, deactivate
-        String userOperationLog = oktaUserToUpdate.getProfile().getForeseeId() + "," + existingOktaUser.getId();
+        String userOperationLog = oktaUserToUpdate.getProfile().getForeseeId() + "," + existingOktaUser.getId() + ",PROFILE_MIGRATED";
         foreseeCSVUtil.writeToFile(userOperationLog, USER_ID_LOG_FILE);
 
         if (!accountEnabled && UserStatus.SUSPENDED != existingUserStatus) {
